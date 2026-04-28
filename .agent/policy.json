@@ -1,0 +1,21 @@
+{
+  "version": "0.1.0",
+  "workflow": "goal-first-github",
+  "handoff_threshold": 0.9,
+  "required_context_fields": [
+    "avatar",
+    "capabilities",
+    "origin_task",
+    "progress",
+    "dynamic_context",
+    "current_context_size",
+    "max_size"
+  ],
+  "required_capabilities": ["handoff"],
+  "github": {
+    "unit_of_work": "issue",
+    "integration_unit": "pull_request",
+    "claim_protocol": "comment-before-work",
+    "default_labels": ["goal", "task", "agent-ready", "blocked", "handoff"]
+  }
+}

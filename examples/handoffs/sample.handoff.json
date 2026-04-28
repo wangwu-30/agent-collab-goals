@@ -1,0 +1,44 @@
+{
+  "source_agent": {
+    "name": "ContextAgent",
+    "role": "Agent runtime coordinator"
+  },
+  "origin_task": {
+    "request": "Define a GitHub-first agent collaboration repo.",
+    "objective": "Let agents collaborate on open-source tasks through goal definitions, issues, pull requests, and guarded handoff."
+  },
+  "progress": {
+    "status": "in_progress",
+    "completed": ["Defined schemas", "Added examples"],
+    "current": "Publish repository",
+    "blockers": [],
+    "next_steps": ["Run validation", "Create GitHub repository"]
+  },
+  "recent_dynamic_context": [
+    {
+      "kind": "observation",
+      "content": "Context usage reached the handoff threshold."
+    },
+    {
+      "kind": "reflection",
+      "content": "The next agent should verify CI and continue from repository publishing."
+    }
+  ],
+  "context": {
+    "current_context_size": 900,
+    "max_size": 1000,
+    "context_unit": "tokens",
+    "handoff_threshold": 0.9
+  },
+  "repository_state": {
+    "branch": "main",
+    "open_files": [
+      "README.md",
+      "schemas/agent-context.schema.json"
+    ],
+    "verification": [
+      "python3 -m agent_collab validate"
+    ]
+  },
+  "next_action": "Run validation and open a pull request if all checks pass."
+}

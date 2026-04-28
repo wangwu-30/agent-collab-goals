@@ -1,0 +1,22 @@
+[project]
+name = "agent-collab-goals"
+version = "0.1.0"
+description = "Goal-first GitHub collaboration protocol for open-source agents"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Agent Collab Goals contributors" }]
+dependencies = []
+
+[project.scripts]
+agent-collab = "agent_collab.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]

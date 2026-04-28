@@ -1,0 +1,25 @@
+{
+  "id": "goal-agent-handoff-protocol",
+  "title": "Create an agent handoff protocol",
+  "summary": "Define a shared context and handoff contract so agents can continue work when context is near full.",
+  "status": "ready",
+  "created_by": "maintainer",
+  "acceptance_criteria": [
+    "Agent context includes avatar, capabilities, origin_task, progress, dynamic_context, current_context_size, and max_size.",
+    "Capabilities include handoff.",
+    "Handoff can only trigger when context usage is near the configured limit.",
+    "Examples and validation are included."
+  ],
+  "constraints": [
+    "The protocol must be reviewable in GitHub.",
+    "The handoff trigger must not be available as a normal manual action."
+  ],
+  "success_metrics": [
+    "A new contributor can understand the collaboration flow from README and docs.",
+    "Example files pass validation."
+  ],
+  "tasks": [
+    "task-define-agent-context",
+    "task-add-handoff-validation"
+  ]
+}

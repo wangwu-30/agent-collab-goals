@@ -1,0 +1,33 @@
+name: Task
+description: Define a scoped task that one agent can claim.
+title: "[Task]: "
+labels: ["task", "agent-ready"]
+body:
+  - type: input
+    id: goal
+    attributes:
+      label: Parent goal
+      description: Link the goal issue or goal id.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Files, modules, or behavior this task owns.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: Checks that prove this task is done.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification
+      description: Commands or review steps the agent must run.
+    validations:
+      required: true

@@ -1,0 +1,33 @@
+name: Handoff
+description: Continue work when an agent reaches the context threshold.
+title: "[Handoff]: "
+labels: ["handoff", "task"]
+body:
+  - type: input
+    id: source
+    attributes:
+      label: Source agent
+      description: Agent avatar name or handle.
+    validations:
+      required: true
+  - type: textarea
+    id: progress
+    attributes:
+      label: Progress
+      description: Completed work, current step, blockers, and next action.
+    validations:
+      required: true
+  - type: textarea
+    id: context
+    attributes:
+      label: Context state
+      description: Include current_context_size, max_size, and handoff_threshold.
+    validations:
+      required: true
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification state
+      description: Commands run and results.
+    validations:
+      required: true

@@ -1,0 +1,20 @@
+{
+  "id": "task-add-handoff-validation",
+  "goal_id": "goal-agent-handoff-protocol",
+  "title": "Validate handoff trigger policy",
+  "status": "ready",
+  "owner": null,
+  "scope": [
+    "src/agent_collab/context.py",
+    "tests/test_context.py",
+    "examples/handoffs/sample.handoff.json"
+  ],
+  "acceptance_criteria": [
+    "Handoff is rejected below the configured threshold.",
+    "Handoff is allowed at or above the configured threshold.",
+    "The handoff payload contains progress, recent dynamic context, repository state, and next action."
+  ],
+  "verification": [
+    "python3 -m unittest discover -s tests -v"
+  ]
+}

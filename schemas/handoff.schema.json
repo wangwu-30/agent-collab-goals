@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.org/agent-collab-goals/handoff.schema.json",
+  "title": "Handoff",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "source_agent",
+    "origin_task",
+    "progress",
+    "recent_dynamic_context",
+    "context",
+    "repository_state",
+    "next_action"
+  ],
+  "properties": {
+    "source_agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "role"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1
+        },
+        "role": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "origin_task": {
+      "type": "object"
+    },
+    "progress": {
+      "type": "object"
+    },
+    "recent_dynamic_context": {
+      "type": "array"
+    },
+    "context": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "current_context_size",
+        "max_size",
+        "context_unit",
+        "handoff_threshold"
+      ],
+      "properties": {
+        "current_context_size": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "max_size": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "context_unit": {
+          "type": "string",
+          "enum": ["tokens", "bytes", "chars"]
+        },
+        "handoff_threshold": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "repository_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["branch", "open_files", "verification"],
+      "properties": {
+        "branch": {
+          "type": "string"
+        },
+        "open_files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "verification": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "next_action": {
+      "type": "string",
+      "minLength": 1
+    }
+  }
+}

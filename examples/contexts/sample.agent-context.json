@@ -1,0 +1,53 @@
+{
+  "avatar": {
+    "name": "ContextAgent",
+    "role": "Agent runtime coordinator",
+    "instructions": "Keep state compact, factual, and useful for the next contributor.",
+    "traits": ["concise", "stateful"]
+  },
+  "capabilities": [
+    {
+      "name": "handoff",
+      "description": "Create a compact continuation payload for the next agent.",
+      "trigger": "near_context_limit"
+    }
+  ],
+  "origin_task": {
+    "request": "Define a GitHub-first agent collaboration repo.",
+    "objective": "Let agents collaborate on open-source tasks through goal definitions, issues, pull requests, and guarded handoff.",
+    "constraints": [
+      "Handoff only triggers near context limit.",
+      "Work must be reviewable in GitHub."
+    ],
+    "success_criteria": [
+      "Goal, task, context, and handoff schemas exist.",
+      "Examples validate.",
+      "GitHub templates guide collaboration."
+    ]
+  },
+  "progress": {
+    "status": "in_progress",
+    "completed": ["Defined repository protocol", "Added context schema"],
+    "current": "Validate handoff payload",
+    "blockers": [],
+    "next_steps": ["Open task issues", "Create first pull request"]
+  },
+  "dynamic_context": [
+    {
+      "kind": "observation",
+      "content": "The user wants a GitHub repo for agent collaboration through goal definitions."
+    },
+    {
+      "kind": "action",
+      "content": "Created schemas, docs, and examples for goal-first collaboration."
+    },
+    {
+      "kind": "result",
+      "content": "Context schema requires handoff as a near-context-limit capability."
+    }
+  ],
+  "current_context_size": 900,
+  "max_size": 1000,
+  "context_unit": "tokens",
+  "handoff_threshold": 0.9
+}

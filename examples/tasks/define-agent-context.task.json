@@ -1,0 +1,21 @@
+{
+  "id": "task-define-agent-context",
+  "goal_id": "goal-agent-handoff-protocol",
+  "title": "Define required agent context fields",
+  "status": "ready",
+  "owner": null,
+  "scope": [
+    "schemas/agent-context.schema.json",
+    "docs/context-schema.md",
+    "examples/contexts/sample.agent-context.json"
+  ],
+  "acceptance_criteria": [
+    "The context schema requires avatar, capabilities, origin_task, progress, dynamic_context, current_context_size, and max_size.",
+    "The capabilities list requires a handoff capability.",
+    "Documentation explains the role of each context field."
+  ],
+  "verification": [
+    "python3 -m agent_collab validate",
+    "python3 -m unittest discover -s tests -v"
+  ]
+}
