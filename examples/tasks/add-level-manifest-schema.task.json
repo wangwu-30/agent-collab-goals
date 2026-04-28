@@ -1,0 +1,21 @@
+{
+  "id": "task-add-level-manifest-schema",
+  "goal_id": "goal-first-agent-built-game",
+  "title": "Add a level manifest schema",
+  "status": "ready",
+  "owner": null,
+  "scope": [
+    "schemas/level.schema.json",
+    "src/agent_collab/validation.py",
+    "tests/test_validation.py"
+  ],
+  "acceptance_criteria": [
+    "Static levels can be validated.",
+    "Agent-directed dynamic levels require a director contract.",
+    "Level manifests declare observations and actions for human and agent players."
+  ],
+  "verification": [
+    "python3 scripts/validate.py",
+    "PYTHONPATH=src python3 -m unittest discover -s tests -v"
+  ]
+}

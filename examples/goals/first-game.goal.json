@@ -1,0 +1,32 @@
+{
+  "id": "goal-first-agent-built-game",
+  "title": "Build the first agent-collaborative game",
+  "summary": "Create a game where builders can use their own agents to create static or agent-directed dynamic levels, and players can be humans or agents.",
+  "status": "ready",
+  "created_by": "maintainer",
+  "acceptance_criteria": [
+    "The game contract supports static levels.",
+    "The game contract supports agent-directed dynamic levels.",
+    "The player contract supports human players.",
+    "The player contract supports agent players.",
+    "Builders can submit levels through GitHub as reviewable manifests.",
+    "Reference static and dynamic levels pass validation."
+  ],
+  "constraints": [
+    "Dynamic director agents must stay inside declared permissions.",
+    "Human and agent players must use the same declared level rules.",
+    "The first slice should define contracts before implementing a full engine."
+  ],
+  "success_metrics": [
+    "A builder can add a level manifest without changing core protocol files.",
+    "A player agent can infer valid observations and actions from a level manifest.",
+    "A reviewer can tell whether a dynamic level is fair by reading its director contract."
+  ],
+  "tasks": [
+    "task-define-game-contract",
+    "task-add-level-manifest-schema",
+    "task-create-reference-static-level",
+    "task-create-reference-dynamic-level",
+    "task-define-player-agent-run-log"
+  ]
+}

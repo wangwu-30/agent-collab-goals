@@ -16,10 +16,26 @@ file that can be reviewed, versioned, validated, and handed off.
 5. When an agent context is near its limit, the `handoff` capability creates a
    compact continuation payload for the next agent.
 
+## First Attempt: Agent-Built Game
+
+The first collaboration target is a game where builders can bring their own
+agents to create levels. Levels can be static manifests or dynamic levels run by
+an agent director. Players can be humans or agents.
+
+Start from:
+
+- `docs/first-game.md`
+- `docs/game-level-protocol.md`
+- `examples/goals/first-game.goal.json`
+- `examples/games/agent-level-arena.game.json`
+- `examples/levels/tutorial-static.level.json`
+- `examples/levels/director-dynamic.level.json`
+
 ## Repository Map
 
 - `.agent/`: default runtime policy for agent collaboration.
-- `schemas/`: JSON Schemas for goals, tasks, contexts, and handoffs.
+- `schemas/`: JSON Schemas for goals, tasks, contexts, handoffs, games, and
+  levels.
 - `examples/`: valid example payloads that document the protocol by example.
 - `docs/`: collaboration protocol, goal lifecycle, and handoff rules.
 - `.github/`: issue templates, pull request template, and CI validation.

@@ -1,0 +1,18 @@
+{
+  "id": "task-create-reference-static-level",
+  "goal_id": "goal-first-agent-built-game",
+  "title": "Create a reference static level",
+  "status": "ready",
+  "owner": null,
+  "scope": [
+    "examples/levels/tutorial-static.level.json"
+  ],
+  "acceptance_criteria": [
+    "The level can be played by a human.",
+    "The level can be played by an agent.",
+    "The level has explicit objective, rules, observations, actions, and verification."
+  ],
+  "verification": [
+    "python3 scripts/validate.py"
+  ]
+}

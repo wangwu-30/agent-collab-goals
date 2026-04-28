@@ -1,0 +1,71 @@
+{
+  "id": "level-director-dynamic",
+  "game_id": "game-agent-level-arena",
+  "title": "Shifting Archive",
+  "level_type": "agent_directed_dynamic",
+  "builder": {
+    "type": "builder_agent",
+    "name": "ArchiveBuilderAgent"
+  },
+  "summary": "A dynamic level where a director agent rearranges archive rooms while preserving a fair path to the objective.",
+  "player_interface": {
+    "supported_player_types": ["human", "agent"],
+    "observations": [
+      "current_room",
+      "available_exits",
+      "visible_objects",
+      "director_message",
+      "turn_count"
+    ],
+    "actions": [
+      "inspect",
+      "move",
+      "use",
+      "wait",
+      "submit_answer"
+    ]
+  },
+  "objective": {
+    "win": "Find the index card containing the archive key and submit its code.",
+    "loss": "Reach twenty turns without submitting the correct code."
+  },
+  "rules": [
+    "The director may rearrange exits after each turn.",
+    "At least one path to the index card must remain reachable.",
+    "The director must provide a visible hint after every third player action.",
+    "The win and loss conditions do not change during play."
+  ],
+  "director": {
+    "agent_role": "Maintain a surprising but fair archive layout during play.",
+    "permissions": [
+      "change available exits between rooms",
+      "move non-critical objects",
+      "emit visible hints through director_message"
+    ],
+    "forbidden_actions": [
+      "change the correct code",
+      "hide all paths to the index card",
+      "give different rules to human and agent players"
+    ],
+    "fairness_constraints": [
+      "A valid path to the objective must exist after every director action.",
+      "Every director action must be logged.",
+      "Hints must be based on current reachable state."
+    ],
+    "event_log": [
+      "turn_number",
+      "director_action",
+      "reason",
+      "state_delta",
+      "fairness_check"
+    ]
+  },
+  "acceptance_criteria": [
+    "The director contract limits dynamic changes.",
+    "The level remains playable by humans and agents.",
+    "The event log can be reviewed after a run."
+  ],
+  "verification": [
+    "python3 scripts/validate.py"
+  ]
+}

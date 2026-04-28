@@ -41,6 +41,13 @@ def require_list(path: Path, payload: dict[str, Any], key: str, *, non_empty: bo
         raise ValidationError(f"{path}: {key} must not be empty")
 
 
+def require_object(path: Path, payload: dict[str, Any], key: str) -> dict[str, Any]:
+    value = payload.get(key)
+    if not isinstance(value, dict):
+        raise ValidationError(f"{path}: {key} must be an object")
+    return value
+
+
 def validate_goal(path: Path) -> None:
     payload = load_json(path)
     require_keys(
@@ -149,12 +156,118 @@ def validate_handoff(path: Path) -> None:
     require_string(path, payload, "next_action")
 
 
+def validate_game(path: Path) -> None:
+    payload = load_json(path)
+    require_keys(
+        path,
+        payload,
+        [
+            "id",
+            "title",
+            "summary",
+            "status",
+            "supported_level_types",
+            "supported_player_types",
+            "action_protocol",
+            "scoring",
+            "fairness_rules",
+        ],
+    )
+    if not payload["id"].startswith("game-"):
+        raise ValidationError(f"{path}: id must start with game-")
+    if payload["status"] not in {"draft", "active", "archived"}:
+        raise ValidationError(f"{path}: invalid status {payload['status']!r}")
+    for key in ["title", "summary"]:
+        require_string(path, payload, key)
+    require_list(path, payload, "supported_level_types", non_empty=True)
+    require_list(path, payload, "supported_player_types", non_empty=True)
+    require_object(path, payload, "action_protocol")
+    require_object(path, payload, "scoring")
+    require_list(path, payload, "fairness_rules", non_empty=True)
+    for level_type in payload["supported_level_types"]:
+        if level_type not in {"static", "agent_directed_dynamic"}:
+            raise ValidationError(f"{path}: unsupported level type {level_type!r}")
+    for player_type in payload["supported_player_types"]:
+        if player_type not in {"human", "agent"}:
+            raise ValidationError(f"{path}: unsupported player type {player_type!r}")
+
+
+def validate_level(path: Path) -> None:
+    payload = load_json(path)
+    require_keys(
+        path,
+        payload,
+        [
+            "id",
+            "game_id",
+            "title",
+            "level_type",
+            "builder",
+            "summary",
+            "player_interface",
+            "objective",
+            "rules",
+            "acceptance_criteria",
+            "verification",
+        ],
+    )
+    if not payload["id"].startswith("level-"):
+        raise ValidationError(f"{path}: id must start with level-")
+    if not payload["game_id"].startswith("game-"):
+        raise ValidationError(f"{path}: game_id must start with game-")
+    if payload["level_type"] not in {"static", "agent_directed_dynamic"}:
+        raise ValidationError(f"{path}: invalid level_type {payload['level_type']!r}")
+    for key in ["title", "summary"]:
+        require_string(path, payload, key)
+
+    builder = require_object(path, payload, "builder")
+    require_keys(path, builder, ["type", "name"])
+    if builder["type"] not in {"human_builder", "builder_agent"}:
+        raise ValidationError(f"{path}: invalid builder.type {builder['type']!r}")
+    if not isinstance(builder["name"], str) or not builder["name"]:
+        raise ValidationError(f"{path}: builder.name must be a non-empty string")
+
+    interface = require_object(path, payload, "player_interface")
+    require_keys(path, interface, ["supported_player_types", "observations", "actions"])
+    for key in ["supported_player_types", "observations", "actions"]:
+        require_list(path, interface, key, non_empty=True)
+    for player_type in interface["supported_player_types"]:
+        if player_type not in {"human", "agent"}:
+            raise ValidationError(f"{path}: invalid player type {player_type!r}")
+
+    require_object(path, payload, "objective")
+    require_list(path, payload, "rules", non_empty=True)
+    require_list(path, payload, "acceptance_criteria", non_empty=True)
+    require_list(path, payload, "verification", non_empty=True)
+
+    if payload["level_type"] == "agent_directed_dynamic":
+        director = require_object(path, payload, "director")
+        require_keys(
+            path,
+            director,
+            [
+                "agent_role",
+                "permissions",
+                "forbidden_actions",
+                "fairness_constraints",
+                "event_log",
+            ],
+        )
+        require_string(path, director, "agent_role")
+        for key in ["permissions", "forbidden_actions", "fairness_constraints", "event_log"]:
+            require_list(path, director, key, non_empty=True)
+    elif "director" in payload:
+        raise ValidationError(f"{path}: static levels must not define director")
+
+
 def validate_repo(root: Path) -> list[Path]:
     checked: list[Path] = []
 
     validators = [
         (root / "examples" / "goals", "*.goal.json", validate_goal),
         (root / "examples" / "tasks", "*.task.json", validate_task),
+        (root / "examples" / "games", "*.game.json", validate_game),
+        (root / "examples" / "levels", "*.level.json", validate_level),
         (root / "examples" / "contexts", "*.agent-context.json", validate_context),
         (root / "examples" / "handoffs", "*.handoff.json", validate_handoff),
     ]
