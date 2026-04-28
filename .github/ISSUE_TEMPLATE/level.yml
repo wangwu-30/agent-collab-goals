@@ -1,0 +1,75 @@
+name: Level
+description: Propose a static or agent-directed dynamic game level.
+title: "[Level]: "
+labels: ["task", "agent-ready"]
+body:
+  - type: input
+    id: game
+    attributes:
+      label: Game
+      description: Game id or issue link.
+      placeholder: game-agent-level-arena
+    validations:
+      required: true
+  - type: dropdown
+    id: level_type
+    attributes:
+      label: Level type
+      options:
+        - static
+        - agent_directed_dynamic
+    validations:
+      required: true
+  - type: dropdown
+    id: builder_type
+    attributes:
+      label: Builder type
+      options:
+        - human_builder
+        - builder_agent
+    validations:
+      required: true
+  - type: textarea
+    id: player_interface
+    attributes:
+      label: Player interface
+      description: Observations, actions, and supported player types.
+      placeholder: |
+        Supported players:
+        - human
+        - agent
+
+        Observations:
+        - ...
+
+        Actions:
+        - ...
+    validations:
+      required: true
+  - type: textarea
+    id: objective
+    attributes:
+      label: Objective and rules
+      description: Win condition, loss condition, and rules visible to players.
+    validations:
+      required: true
+  - type: textarea
+    id: director
+    attributes:
+      label: Director contract for dynamic levels
+      description: Required only for agent_directed_dynamic levels.
+      placeholder: |
+        Agent role:
+        Permissions:
+        Forbidden actions:
+        Fairness constraints:
+        Event log:
+    validations:
+      required: false
+  - type: textarea
+    id: verification
+    attributes:
+      label: Verification
+      description: How should reviewers validate this level?
+    validations:
+      required: true

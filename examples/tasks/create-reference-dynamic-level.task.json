@@ -1,0 +1,18 @@
+{
+  "id": "task-create-reference-dynamic-level",
+  "goal_id": "goal-first-agent-built-game",
+  "title": "Create a reference agent-directed dynamic level",
+  "status": "ready",
+  "owner": null,
+  "scope": [
+    "examples/levels/director-dynamic.level.json"
+  ],
+  "acceptance_criteria": [
+    "The level declares a director agent role.",
+    "The director has explicit permissions and forbidden actions.",
+    "The level can be attempted by a human player or an agent player."
+  ],
+  "verification": [
+    "python3 scripts/validate.py"
+  ]
+}

@@ -1,0 +1,44 @@
+{
+  "id": "level-tutorial-static",
+  "game_id": "game-agent-level-arena",
+  "title": "Three Doors Tutorial",
+  "level_type": "static",
+  "builder": {
+    "type": "human_builder",
+    "name": "maintainer"
+  },
+  "summary": "A deterministic tutorial level where the player inspects three doors and chooses the one matching a clue.",
+  "player_interface": {
+    "supported_player_types": ["human", "agent"],
+    "observations": [
+      "room_description",
+      "visible_doors",
+      "clue_text",
+      "inventory",
+      "turn_count"
+    ],
+    "actions": [
+      "inspect",
+      "move",
+      "submit_answer"
+    ]
+  },
+  "objective": {
+    "win": "Submit the door marked with the symbol that matches the clue.",
+    "loss": "Submit two incorrect answers or exceed ten turns."
+  },
+  "rules": [
+    "The clue is visible from the first turn.",
+    "The correct door does not change during play.",
+    "The player may inspect any door before submitting an answer.",
+    "The level ends immediately after a correct answer."
+  ],
+  "acceptance_criteria": [
+    "A human can identify the valid actions from the manifest.",
+    "An agent can identify observations and produce a valid action object.",
+    "The level has deterministic terminal conditions."
+  ],
+  "verification": [
+    "python3 scripts/validate.py"
+  ]
+}

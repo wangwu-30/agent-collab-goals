@@ -12,6 +12,13 @@
     "max_size"
   ],
   "required_capabilities": ["handoff"],
+  "first_attempt": {
+    "type": "game",
+    "game_id": "game-agent-level-arena",
+    "goal_id": "goal-first-agent-built-game",
+    "level_types": ["static", "agent_directed_dynamic"],
+    "player_types": ["human", "agent"]
+  },
   "github": {
     "unit_of_work": "issue",
     "integration_unit": "pull_request",

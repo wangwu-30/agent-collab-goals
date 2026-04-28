@@ -1,0 +1,22 @@
+{
+  "id": "task-define-game-contract",
+  "goal_id": "goal-first-agent-built-game",
+  "title": "Define the first game contract",
+  "status": "ready",
+  "owner": null,
+  "scope": [
+    "docs/first-game.md",
+    "docs/game-level-protocol.md",
+    "schemas/game.schema.json",
+    "examples/games/agent-level-arena.game.json"
+  ],
+  "acceptance_criteria": [
+    "The game manifest declares supported level types.",
+    "The game manifest declares supported player types.",
+    "The game manifest includes action, scoring, and fairness contracts."
+  ],
+  "verification": [
+    "python3 scripts/validate.py",
+    "PYTHONPATH=src python3 -m unittest discover -s tests -v"
+  ]
+}

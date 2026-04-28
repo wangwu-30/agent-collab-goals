@@ -1,0 +1,25 @@
+{
+  "id": "game-agent-level-arena",
+  "title": "Agent Level Arena",
+  "summary": "A file-first game where human builders and builder agents contribute static or agent-directed dynamic levels for human and agent players.",
+  "status": "active",
+  "supported_level_types": ["static", "agent_directed_dynamic"],
+  "supported_player_types": ["human", "agent"],
+  "action_protocol": {
+    "turn_model": "discrete",
+    "input_format": "json",
+    "required_action_fields": ["type"],
+    "common_actions": ["inspect", "move", "use", "wait", "submit_answer"]
+  },
+  "scoring": {
+    "default_start_score": 100,
+    "step_penalty": 1,
+    "failure_score": 0,
+    "success_bonus": 25
+  },
+  "fairness_rules": [
+    "Rules visible to human players must also be available to agent players.",
+    "Dynamic directors must log every state change.",
+    "Dynamic directors may not change terminal conditions after play starts unless the level explicitly declares that mechanic."
+  ]
+}

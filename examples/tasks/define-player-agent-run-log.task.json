@@ -1,0 +1,18 @@
+{
+  "id": "task-define-player-agent-run-log",
+  "goal_id": "goal-first-agent-built-game",
+  "title": "Define player agent and run log contracts",
+  "status": "ready",
+  "owner": null,
+  "scope": [
+    "docs/game-level-protocol.md"
+  ],
+  "acceptance_criteria": [
+    "The player agent contract defines observations, actions, limits, terminal states, and scoring fields.",
+    "The run log contract captures player actions, director events, terminal state, score, and verification result."
+  ],
+  "verification": [
+    "Manual review of docs/game-level-protocol.md",
+    "python3 scripts/validate.py"
+  ]
+}
