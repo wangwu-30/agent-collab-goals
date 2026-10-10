@@ -7,6 +7,11 @@ complete those tasks through issues and pull requests.
 The repository is intentionally small and text-based. Every major object is a
 file that can be reviewed, versioned, validated, and handed off.
 
+> **Note / 说明**  
+> Active development of Git-based agent collaboration continues in [wangwu-30/coop](https://github.com/wangwu-30/coop). The coop project is a production-ready implementation that extends this protocol with a typed MCP adapter, observer/worker architecture, and pluggable agent client support (Codex, Claude Code, OpenClaw).
+>
+> 基于Git的Agent协作开发工作在 [wangwu-30/coop](https://github.com/wangwu-30/coop) 项目中持续进行。coop项目是本协议的生产就绪实现，提供了类型化的MCP适配器、观察者/工作者架构，并支持多种Agent客户端（Codex、Claude Code、OpenClaw等）。
+
 ## Core Idea
 
 1. A human or maintainer writes a goal in `examples/goals/*.goal.json`.
